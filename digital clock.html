@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Digital Clock</title>
+  <style>
+    .clock {
+      font-family: "Times New Roman";
+      font-size: 130px;
+      text-align: center;
+      margin-top: 80px;
+      color: red;
+    }
+    .clockname {
+      font-family: "Times New Roman";
+      font-size: 130px;
+      text-align: center;
+      color: orange;
+    }
+    .buttons {
+      text-align: center;
+      margin-top: 80px;
+    }
+    .start_button {
+      background-color: green; 
+      color: white;
+      padding: 20px 40px;
+      font-size: 40px;
+      border: 10px;
+      cursor: pointer;
+      margin-right: 20px;
+    }
+    .stop_button {
+      background-color: red;
+      color: black;
+      padding: 20px 40px;
+      font-size: 40px;
+      border: 10px;
+      cursor: pointer;
+    }
+    .date {
+      font-family: "Bebas Neue";
+      font-size: 80px;
+      text-align: center;
+      margin-top: 30px;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div class="clockname"><i>DIGITAL CLOCK</i></div>
+  <div class="clock">00:00:00</div>
+  <div class="date">DD-MM-YYYY</div>
+  <div class="buttons">
+    <button class="start_button" onclick="startClock()">Start</button>
+    <button class="stop_button" onclick="stopClock()">Stop</button>
+  </div>
+
+  <script>
+    let clockE = document.querySelector(".clock");
+    let dateE = document.querySelector(".date");
+    let timer;
+
+    function update() {
+      let now = new Date();
+      let hrs = now.getHours().toString().padStart(2, "0");
+      let min = now.getMinutes().toString().padStart(2, "0");
+      let sec = now.getSeconds().toString().padStart(2, "0");
+      let timeString = hrs + ":" + min + ":" + sec;
+      clockE.textContent = timeString;
+
+      let month = (now.getMonth() + 1).toString().padStart(2, "0");
+      let year = now.getFullYear();
+      let day = now.getDate().toString().padStart(2, "0");
+      let dateString = day + "-" + month + "-" + year;
+      dateE.textContent = dateString;
+    }
+
+    function startClock() {
+      update(); 
+      timer = setInterval(update, 1000); 
+    }
+
+    function stopClock() {
+      clearInterval(timer); 
+    }
+  </script>
+</body>
+</html>

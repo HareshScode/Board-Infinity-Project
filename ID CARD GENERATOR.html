@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student ID Card Generator</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  
+    body {
+      font-family: Arial, sans-serif;
+      background-color: orange;
+    }
+  
+    .main-title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+      background-color: black;
+      color: red;
+      padding: 10px;
+      border-radius: 1px;
+    }
+  
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 30px;
+      height: 100vh;
+    }
+  
+    .form-container {
+      width: 500px;
+      background-color: #ffffff;
+      padding: 20px;
+      border-right: 2px solid #4047F0;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+  
+    .form {
+      margin-left: 80px;
+      padding: 20px;
+    }
+  
+    .out {
+      margin-bottom: 20px;
+    }
+  
+    .out label {
+      font-size: 17px;
+      font-weight: bold;
+      color: red;
+      line-height: 20px;
+    }
+  
+    .field {
+      border: 1px solid #000000;
+      display: flex;
+      align-items: center;
+      padding: 2px 5px;
+      width: 280px;
+      border-radius: 5px;
+    }
+  
+    .field input {
+      outline: none;
+      border: none;
+    }
+  
+    .card-container {
+      width: 600px;
+      margin-left: 120px;
+      border-radius: 18px;
+    }
+  
+    .card .label {
+      font-weight: normal;
+      color: red;
+      margin-top: 10px;
+    }
+  
+    .card .data {
+      font-weight: bold;
+      color: #000000;
+      margin-top: 10px;
+    }
+  
+    .card {
+      display: flex;
+      height: 240px;
+      width: 80%;
+      color: red;
+      border-radius: 5px;
+      background-color: rgba(220, 219, 219, 0.865);
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    }
+  
+    .i {
+      background: rgb(2, 0, 36);
+      background: linear-gradient(2deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+      padding: 34px 20px;
+      border-radius: 12px;
+    }
+  
+    .con {
+      display: flex;
+      flex-direction: column;
+      margin-top: 60px;
+      margin-left: 20px;
+      gap: 10px;
+      text-align: left;
+    }
+  
+    .card img {
+      width: 140px;
+      height: 160px;
+      border-radius: 10%;
+      margin-bottom: 10px;
+    }
+  
+    .card h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  
+    .card p {
+      margin: 5px 0;
+      font-size: 16px;
+    }
+  
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+  
+    .button-container button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4047F0;
+      color: yellow;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="main-title">Student ID Card Generator</h1>
+  <div class="container">
+    <div class="form-container">
+      <h2 style="color: black; margin-left: 80px; padding: 20px;">Enter Student Details</h2>
+      <form id="id-card-form" class="form">
+        <div class="out">
+          <label for="name">Enter Name:</label><br>
+          <div class="field">
+            <i class="fas fa-user-circle" style="margin-right: 20px; margin-left: 4px;"></i>
+            <input type="text" id="name" required><br><br>
+          </div>
+        </div>
+        <div class="out">
+          <label for="student-id">College Name:</label><br>
+          <div class="field">
+            <i class="fas fa-university" style="margin-right: 20px; margin-left: 4px;"></i>
+            <input type="text" id="student-id" required><br><br>
+          </div>
+        </div>
+        <div class="out">
+          <label for="course">Enter Location:</label>
+          <div class="field">
+            <i class="fas fa-address-card" style="margin-right: 20px; margin-left: 4px;"></i>
+            <input type="text" id="course" required><br><br>
+          </div>
+        </div>
+        <div class="out">
+          <label for="photo">Enter Student Picture:</label>
+          <div class="phot">
+            <input type="file" id="photo" accept="image/*" required><br><br>
+          </div>
+        </div>
+        <div class="button-container">
+          <button type="button" onclick="validateForm()">Generate Card</button>
+        </div>
+      </form>
+    </div>
+    <div class="card-container">
+      <h2 style="color: black; margin-top: 40px; margin-left: 100px; padding: 20px;">Student ID Card</h2>
+      <div class="card" id="id-card">
+        <div class="i">
+          <img id="photo-preview" alt="Please Input Image">
+        </div>
+        <div class="con">
+          <p id="name-preview">Enter Name</p>
+          <p id="student-id-preview">Enter College Name</p>
+          <p id="course-preview">Enter Location</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function generateIDCard(name, collegeName, location, photo) {
+      var photoPreview = document.getElementById('photo-preview');
+      var namePreview = document.getElementById('name-preview');
+      console.log(photoPreview)
+      var collegeNamePreview = document.getElementById('student-id-preview');
+      var locationPreview = document.getElementById('course-preview');
+    
+      console.log(locationPreview)
+  
+      photoPreview.src = URL.createObjectURL(photo);
+    
+      namePreview.innerHTML = `<span class="label">Name:</span> <span class="data">${name}</span>`;
+      collegeNamePreview.innerHTML = `<span class="label">College:</span> <span class="data">${collegeName}</span>`;
+      locationPreview.innerHTML = `<span class="label">Location:</span> <span class="data">${location}</span>`;
+    }
+  
+    function validateForm() {
+      var name = document.getElementById('name').value;
+      var collegeName = document.getElementById('student-id').value;
+      var location = document.getElementById('course').value;
+      var photo = document.getElementById('photo').files[0];
+    
+      if (name && collegeName && location && photo) {
+        console.log(name, collegeName, location, photo)
+        generateIDCard(name, collegeName, location, photo);
+      } else {
+        alert('Please fill in all the fields.');
+      }
+    }
+  </script>
+</body>
+</html>
